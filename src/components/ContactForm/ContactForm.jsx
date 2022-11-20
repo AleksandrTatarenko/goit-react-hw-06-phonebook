@@ -11,12 +11,13 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target.elements;
-    const isIncludeContact = contacts.map(contact => contact.name.toLowerCase().includes(form.name.value.toLowerCase()))
+    const form = e.target;
+    const isIncludeContact = contacts.map(contact => contact.name.toLowerCase().includes(form.elements.name.value.toLowerCase()))
     if (isIncludeContact.includes(true)) {
       return Notiflix.Notify.warning(`${form.name.value} is already in contacts`);
     }
     dispatch(addContact(form.name.value, form.number.value));
+    form.reset();
   }
 
   return (
